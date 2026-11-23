@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f0f2f5;
+  --panel: #ffffff;
+  --panel-soft: #f7f8fa;
+  --hover: #f0f2f5;
+  --border: #e4e8ec;
+  --text: #111b21;
+  --muted: #667781;
+  --faint: #8696a0;
+  --accent: #008069;
+  --accent-dark: #006d5b;
+  --bubble-in: #ffffff;
+  --bubble-out: #d9fdd3;
+  --danger: #e5484d;
+  --wallpaper: #efeae2;
+}
+
+[data-theme='dark'] {
+  --bg: #06090b;
+  --panel: #111b21;
+  --panel-soft: #182229;
+  --hover: #202c33;
+  --border: #222d34;
+  --text: #e9edef;
+  --muted: #8696a0;
+  --faint: #667781;
+  --accent: #00a884;
+  --accent-dark: #008069;
+  --bubble-in: #202c33;
+  --bubble-out: #005c4b;
+  --danger: #f15c60;
+  --wallpaper: #0b141a;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-app-bg text-app-text font-sans antialiased;
+  overscroll-behavior: none;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(134, 150, 160, 0.35);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(134, 150, 160, 0.55);
+}
+
+/* Chat wallpaper with subtle doodle tint */
+.chat-wallpaper {
+  background-color: var(--wallpaper);
+  background-image: radial-gradient(rgba(134, 150, 160, 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Inputs */
+.field {
+  @apply w-full rounded-xl border border-app-border bg-app-soft px-4 py-3 text-sm text-app-text placeholder:text-app-faint outline-none transition focus:border-app-accent focus:ring-2 focus:ring-2 focus:ring-[#0B141A]/30;
+}
+
+.label {
+  @apply mb-1.5 block text-xs font-medium uppercase tracking-wide text-app-muted;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 bg-app-accent text-white hover:bg-app-accent-dark active:scale-[0.99];
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 border border-app-border bg-app-soft text-app-text hover:bg-app-hover;
+}
+
+.icon-btn {
+  @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-app-muted transition hover:bg-app-hover hover:text-app-text;
+}
+
+.card {
+  @apply rounded-2xl border border-app-border bg-app-panel;
+}
+
+/* Message tails */
+.bubble-out::after,
+.bubble-in::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 12px;
+}
+.bubble-out::after {
+  right: -8px;
+  background: var(--bubble-out);
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+.bubble-in::after {
+  left: -8px;
+  background: var(--bubble-in);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.typing-dot {
+  @apply inline-block h-1.5 w-1.5 rounded-full bg-app-faint;
+  animation: bounceDot 1.2s infinite ease-in-out;
+}
+
+@keyframes bounceDot {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
